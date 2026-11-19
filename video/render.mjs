@@ -10,7 +10,7 @@ import {once} from 'node:events';
 import {writeSoundtrack} from './soundtrack.mjs';
 const here=dirname(fileURLToPath(import.meta.url)),root=resolve(here,'..');
 const width=1920,height=1080,fps=24,duration=45;
-const colors={paper:'#FCFAF5',ink:'#111318',muted:'#737780',line:'#E4E6EA',blue:'#1D73FF',green:'#124A09',paleGreen:'#DDFFD8',red:'#710120',paleRed:'#F2E1E5',indigo:'#475CFF',violet:'#8054FF'};
+const colors={paper:'#F6F8FE',ink:'#111C33',muted:'#56637D',line:'#DFE5F2',blue:'#1D73FF',red:'#710120',paleRed:'#F2E1E5',indigo:'#475CFF',violet:'#8054FF'};
 const fonts={regular:fontkit.openSync(resolve(here,'fonts/NotoSansSC-Regular.ttf')),bold:fontkit.openSync(resolve(here,'fonts/NotoSansSC-SemiBold.ttf'))};
 const pathCache=new Map();
 function text(value,x,y,size=32,color=colors.ink,weight='regular',align='left'){
@@ -28,7 +28,6 @@ const line=(x1,y1,x2,y2,color=colors.line,thickness=1.5)=>`<path d="M${x1} ${y1}
 function label(value,x,y,w,fill='#F2F5FA',color=colors.muted){return box(x,y,w,42,fill,'none',10)+text(value,x+w/2,y+28,21,color,'regular','center');}
 const code=(s,x,y,size=26,color='#334866')=>text(s,x,y,size,color);
 const imageURI=(buffer,mime='image/png')=>`data:${mime};base64,${buffer.toString('base64')}`;
-const wordmark=imageURI(await sharp(readFileSync(resolve(root,'assets/wordmark-option-a.svg'))).resize({width:1500}).png().toBuffer());
 const mascot=imageURI(readFileSync(resolve(root,'assets/mascot.png')));
 const tokenwave=imageURI(await sharp(readFileSync(resolve(root,'assets/tokenwave.svg'))).resize({width:440}).png().toBuffer());
 const image=(url,x,y,w,h)=>`<image href="${url}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid meet"/>`;
@@ -37,6 +36,17 @@ function shell(title,subtitle=''){
  return box(230,220,1460,650,'#fff','#E1E3E8',24,true)+box(230,220,1460,68,'#F7F8FA','none',24)+`<rect x="230" y="257" width="1460" height="31" fill="#F7F8FA"/>`+[0,1,2].map((i)=>`<circle cx="${268+i*25}" cy="254" r="6.5" fill="${['#EFA59B','#E5D495','#B3CFA9'][i]}"/>`).join('')+text(title,960,263,23,'#596170','regular','center')+(subtitle?text(subtitle,290,330,24,colors.muted):'');
 }
 function footer(source=''){return image(tokenwave,88,990,200,48)+text(source,1830,1020,18,colors.muted,'regular','right');}
+function cover(u,heading,subheading){
+ const p=opacity(u,0,.65);
+ const background='<rect width="1920" height="1080" fill="url(#cover)"/><rect width="1920" height="1080" fill="url(#grid)"/><ellipse cx="1450" cy="525" rx="660" ry="560" fill="url(#glow)"/>';
+ let artwork=box(1340,349,356,356,'#192A4C','#4263A0',64,true)+image(mascot,1384,389,268,268);
+ artwork+=line(1130,530,1340,530,'#4C70B4',2)+line(1696,530,1832,530,'#4C70B4',2);
+ artwork+='<circle cx="1130" cy="530" r="5" fill="#9AB9FF"/><circle cx="1832" cy="530" r="5" fill="#9AB9FF"/>';
+ let copy=box(150,217,240,63,'#fff','none',10)+image(tokenwave,165,222,210,52);
+ copy+=text(heading[0],150,434,78,'#FFFFFF','bold')+text(heading[1],150,531,78,'#AFC9FF','bold');
+ copy+=text(subheading[0],150,652,31,'#E5ECFF')+text(subheading[1],150,704,31,'#E5ECFF');
+ return background+group(artwork,p,26*(1-p))+group(copy,p,0,20*(1-p));
+}
 function scene0(u){
  const query='What should an AI test engineer test?';const chars=Math.floor(clamp((u-.65)/2)*query.length);
  let content=image(mascot,865,112,190,198)+text('Before a software release',960,350,27,colors.muted,'regular','center');
@@ -48,11 +58,7 @@ function scene0(u){
  return group(content,opacity(u),0,10*(1-opacity(u)))+footer();
 }
 function scene1(u){
- let content=text('Introducing',960,255,27,colors.muted,'regular','center');
- content+=image(wordmark,380,325,1160,265);
- content+=text('Evaluating Coding Agents as',960,665,36,colors.ink,'bold','center');
- content+=text('Autonomous Software Test Engineers',960,721,36,colors.ink,'bold','center');
- return group(content,opacity(u),0,22*(1-opacity(u)))+footer();
+ return cover(u,['SpecEngineering','Bench'],['Evaluating coding agents as','autonomous software test engineers']);
 }
 function scene2(u){
  let out=text('From requirements to executable evidence.',960,168,46,colors.ink,'bold','center');
@@ -80,7 +86,7 @@ function scene3(u){
   const p=opacity(u,6.1,.4);out+=group(box(290,781,1340,54,colors.paleRed,'none',9)+text("Defective snapshot: fail · KeyError: 'pane'",320,817,24,colors.red,'bold'),p);
  }
  // After the assertion appears, the verifier board slides over the original test.
- if(u>8.0){const p=opacity(u,8,.65);let board=box(410,362,1100,430,'#182131','#182131',24,true)+text('EVALUATOR REPLAY',960,422,22,'#9AAAC5','bold','center');
+ if(u>8.0){const p=opacity(u,8,.65);let board=box(410,362,1100,430,'url(#cover)','#3B5390',24,true)+text('EVALUATOR REPLAY',960,422,22,'#B7CAE8','bold','center');
   board+=box(450,454,490,230,'#111926','#35445C',12)+box(980,454,490,230,'#111926','#35445C',12);
   board+=text('DEFECTIVE',695,498,21,'#AEBBD0','bold','center')+text('REPAIRED',1225,498,21,'#AEBBD0','bold','center');
   board+=text('FAIL',695,602,72,'#F595A5','bold','center');
@@ -94,7 +100,13 @@ function scene4(u){
  let out=text('Test validity decouples from defect detection.',960,180,43,colors.ink,'bold','center');
  out+=text('Across seven frontier coding agents',960,243,27,colors.muted,'regular','center');
  const rows=[['Head Pass Rate',91.47,colors.blue],['Change-focused Coverage',80.48,colors.indigo],['Fail-to-Pass Rate',26.36,colors.violet]];
- rows.forEach(([name,value,color],i)=>{const y=370+i*155,p=ease((u-.4-i*.18)/1.3);out+=text(name,310,y,26,colors.ink,'bold')+box(310,y+30,1180,28,'#E8E9ED','none',7)+box(310,y+30,Math.max(.1,1180*value/100*p),28,color,'none',7)+text((value*p).toFixed(2)+'%',1605,y+53,43,color,'bold','right');});
+ out+=box(232,295,1456,520,'#fff',colors.line,24,true);
+ rows.forEach(([name,value,color],i)=>{
+  const y=374+i*146,p=ease((u-.4-i*.18)/1.3);
+  out+=text(name,310,y,26,colors.ink,'bold')+box(310,y+27,1090,26,'#ECF0F8','none',8);
+  out+=box(310,y+27,Math.max(.1,1090*value/100*p),26,`url(#metric-${i})`,'none',8);
+  out+=group(text(value.toFixed(2)+'%',1600,y+49,44,color,'bold','right'),p);
+ });
  out+=group(text('Reaching patched code does not ensure behavioral discrimination.',960,895,29,colors.muted,'regular','center'),opacity(u,2.6));
  return group(out,opacity(u))+footer('Table 3 · Seven-agent means · All measures shown as percentages');
 }
@@ -111,24 +123,31 @@ function scene5(u){
  return group(out,opacity(u))+footer('Figure 2 · Current benchmark inventory');
 }
 function scene6(u){
- let out=image(wordmark,390,250,1140,261)+text('Explore the paper, results, and agent evidence.',960,623,36,colors.ink,'bold','center');
- out+=box(370,706,1180,80,'#fff','#D8E3F7',14,true)+text('tokenwave-ai.github.io/TestEngineerBench-Page',960,758,30,colors.blue,'bold','center');
- out+=group(text('Paper',790,861,25,colors.muted,'regular','center')+text('·',875,861,25,colors.muted,'regular','center')+text('Leaderboard',990,861,25,colors.muted,'regular','center')+text('·',1125,861,25,colors.muted,'regular','center')+text('Cases',1210,861,25,colors.muted,'regular','center'),opacity(u,1.4));
- return group(out,opacity(u),0,15*(1-opacity(u)))+footer();
+ return cover(u,['Explore the','benchmark'],['Paper, leaderboard, and case studies','GitHub · TokenWave-AI/SpecEngineeringBench']);
 }
 const scenes=[{start:0,end:4,fn:scene0},{start:4,end:8,fn:scene1},{start:8,end:13,fn:scene2},{start:13,end:26,fn:scene3},{start:26,end:33,fn:scene4},{start:33,end:39,fn:scene5},{start:39,end:45,fn:scene6}];
 function frame(t){
- let body=`<rect width="1920" height="1080" fill="${colors.paper}"/><ellipse cx="960" cy="540" rx="830" ry="390" fill="url(#warm)"/>`;
+ let body=`<rect width="1920" height="1080" fill="${colors.paper}"/><rect width="1920" height="1080" fill="url(#paper-grid)"/><ellipse cx="960" cy="535" rx="990" ry="515" fill="url(#wash)"/>`;
  for(const scene of scenes){if(t<scene.start-.3||t>=scene.end)continue;const u=t-scene.start;const outFade=scene.end<duration?clamp((scene.end-t)/.26):1;body+=group(scene.fn(Math.max(0,u)),outFade);}
- body+=`<rect x="88" y="1055" width="1744" height="2" fill="#E9E6E1"/><rect x="88" y="1055" width="${1744*clamp(t/duration)}" height="2" fill="#1D73FF"/>`;
- return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 1920 1080"><defs><filter id="shadow" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#35323A" flood-opacity=".09"/></filter><radialGradient id="warm"><stop stop-color="#F4E9D6" stop-opacity=".42"/><stop offset="1" stop-color="#FCFAF5" stop-opacity="0"/></radialGradient></defs>${body}</svg>`);
+ body+=`<rect x="88" y="1055" width="1744" height="2" fill="#8DA7DC" opacity=".35"/><rect x="88" y="1055" width="${1744*clamp(t/duration)}" height="2" fill="#438DFF"/>`;
+ return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 1920 1080"><defs>
+ <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#142A5A" flood-opacity=".1"/></filter>
+ <linearGradient id="cover" x2="1" y2="1"><stop stop-color="#0B1428"/><stop offset="1" stop-color="#162A54"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#3B6AFE" stop-opacity=".38"/><stop offset="1" stop-color="#3B6AFE" stop-opacity="0"/></radialGradient>
+ <radialGradient id="wash"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+ <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse"><path d="M64 0H0V64" fill="none" stroke="#7798DD" stroke-opacity=".14"/></pattern>
+ <pattern id="paper-grid" width="64" height="64" patternUnits="userSpaceOnUse"><path d="M64 0H0V64" fill="none" stroke="#6081BA" stroke-opacity=".10"/></pattern>
+ <linearGradient id="metric-0"><stop stop-color="#76B1FF"/><stop offset="1" stop-color="#1D73FF"/></linearGradient>
+ <linearGradient id="metric-1"><stop stop-color="#8999FF"/><stop offset="1" stop-color="#475CFF"/></linearGradient>
+ <linearGradient id="metric-2"><stop stop-color="#AE91FF"/><stop offset="1" stop-color="#8054FF"/></linearGradient>
+ </defs>${body}</svg>`);
 }
 const stillsIndex=process.argv.indexOf('--stills');
 if(stillsIndex>=0){const dir=resolve(process.argv[stillsIndex+1]||resolve(tmpdir(),'teb-video-preview'));mkdirSync(dir,{recursive:true});for(const t of [2.6,6,10.5,18.7,24.1,29.7,36.7,42.5])await sharp(frame(t)).resize(1280,720).png().toFile(resolve(dir,`frame-${t}.png`));console.log('Stills: '+dir);}
 else{
  const scratch=mkdtempSync(resolve(tmpdir(),'teb-video-'));const audio=resolve(scratch,'score.wav');writeSoundtrack(audio,duration);let encoder;
  try{
-  const output=resolve(here,'TestEngineerBench-promo.mp4');
+  const output=resolve(here,'SpecEngineeringBench-promo.mp4');
   encoder=spawn('ffmpeg',['-hide_banner','-loglevel','error','-y','-f','rawvideo','-pixel_format','rgba','-video_size',`${width}x${height}`,'-framerate',String(fps),'-i','pipe:0','-i',audio,'-c:v','libx264','-preset','medium','-crf','18','-threads','4','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-movflags','+faststart','-t',String(duration),output],{stdio:['pipe','ignore','inherit']});
   const completion=once(encoder,'close');
   encoder.stdin.on('error',error=>{if(error.code!=='EPIPE')console.error(error);});

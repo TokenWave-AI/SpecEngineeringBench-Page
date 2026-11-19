@@ -196,3 +196,17 @@ renderResults();renderCategories();renderRepositories();renderHistogram();render
 window.addEventListener('resize',()=>requestAnimationFrame(refreshTabIndicators));
 document.fonts.ready.then(refreshTabIndicators);
 requestAnimationFrame(refreshTabIndicators);
+
+const overviewFilm = document.getElementById('overview-film');
+const overviewPlay = document.querySelector('.film-play');
+if (overviewFilm && overviewPlay) {
+  overviewPlay.hidden = false;
+  overviewPlay.addEventListener('click', () => {
+    overviewPlay.hidden = true;
+    overviewFilm.focus();
+    overviewFilm.play().catch(() => {
+      // The native controls remain available if the browser blocks playback.
+    });
+  });
+  overviewFilm.addEventListener('play', () => { overviewPlay.hidden = true; });
+}

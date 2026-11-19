@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1800" height="820" viewBox="0 0 1800 820" role="img" aria-labelledby="title desc">
-<title id="title">Existing benchmark settings and TestEngineerBench</title>
-<desc id="desc">Issue-guided settings provide faulty behavior; target-guided settings provide investigation locations. TestEngineerBench supplies requirements, a repository and an environment for autonomous testing and defect reporting.</desc>
+<title id="title">Existing benchmark settings and SpecEngineeringBench</title>
+<desc id="desc">Issue-guided settings provide faulty behavior; target-guided settings provide investigation locations. SpecEngineeringBench supplies requirements, a repository and an environment for autonomous testing and defect reporting.</desc>
 <rect x="0" y="0" width="1800" height="820" rx="0" stroke="none" fill="white" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="14" y="15" width="502" height="790" rx="14" stroke="none" fill="#F8FAF3" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="500" y="15" width="16" height="790" rx="0" stroke="none" fill="#F8FAF3" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
@@ -12,7 +12,7 @@
 <rect x="1028" y="15" width="758" height="790" rx="14" stroke="none" fill="#EFEFF7" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="1028" y="15" width="16" height="790" rx="0" stroke="none" fill="#EFEFF7" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M 1028 15 L 1772 15 C 1781 15 1786 20 1786 29 L 1786 77 L 1028 77 Z" stroke="none" fill="#BEBEE4" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="1407.0" y="56" font-family="Comic Sans MS, Comic Sans, cursive" font-size="28" font-weight="700" text-anchor="middle" fill="#424543">(c) TestEngineerBench</text>
+<text x="1407.0" y="56" font-family="Comic Sans MS, Comic Sans, cursive" font-size="28" font-weight="700" text-anchor="middle" fill="#424543">(c) SpecEngineeringBench</text>
 <text x="260" y="115" font-family="Comic Sans MS, Comic Sans, cursive" font-size="23" font-weight="700" text-anchor="middle" fill="#526E39">Investigate a described failure</text>
 <rect x="47" y="161" width="243" height="169" rx="9" stroke="none" fill="#EAE8E1" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="43" y="156" width="243" height="169" rx="9" stroke="#526E39" fill="#FFFDF8" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>

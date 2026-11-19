@@ -1,9 +1,9 @@
-<p align="center"><img src="assets/logo.png" width="850" alt="TestEngineerBench" /></p>
+<p align="center"><img src="assets/logo.png" width="850" alt="SpecEngineeringBench" /></p>
 
 <p align="center"><b>Evaluating Coding Agents as Autonomous Software Test Engineers</b></p>
-<p align="center"><a href="assets/paper.pdf">Paper</a> · Code & data: coming soon</p>
+<p align="center"><a href="assets/paper.pdf">Paper</a> · <a href="https://github.com/TokenWave-AI/SpecEngineeringBench">Code</a> · <a href="https://huggingface.co/datasets/Tokenwave-AI/SpecEngineeringBench">Data</a></p>
 
-TestEngineerBench evaluates requirements-driven testing and defect discovery across **100 instances**, **78 Python repositories**, **16 application categories**, and **531 recorded defect occurrences**. Agents receive a product requirements document, a prerelease repository, and a configured execution environment, without issue descriptions or investigation targets.
+SpecEngineeringBench evaluates requirements-driven testing and defect discovery across **100 instances**, **78 Python repositories**, **16 application categories**, and **531 recorded defect occurrences**. Agents receive a product requirements document, a prerelease repository, and a configured execution environment, without issue descriptions or investigation targets.
 
 This repository contains the project website, not the benchmark implementation. It introduces the benchmark goal, requirements-driven investigation, two independent tasks and the original Figure 1, followed by sortable model results, interactive dataset statistics, five RQ groups with concise takeaways and evidence charts, a complete Folium task input with output excerpts, and six trajectory case studies.
 
@@ -21,7 +21,7 @@ npm run check
 
 All site resources use relative paths, supporting both root domains and GitHub Pages project paths. The included GitHub Actions workflow skips private repositories and deploys a curated static artifact on pushes to `main` or manual dispatch. Enable **Settings → Pages → Source → GitHub Actions** first. A private repository requires a GitHub plan that supports Pages for private repositories; this project does not change repository visibility.
 
-Published project URL: `https://tokenwave-ai.github.io/TestEngineerBench-Page/`.
+Published project URL: `https://tokenwave-ai.github.io/SpecEngineeringBench-Page/`.
 
 ### Visual system
 
@@ -33,21 +33,18 @@ The site follows the supplied TokenWave research guidelines: white/black/gray su
 - `assets/paper-content.js`: manuscript excerpts, complete PRD, instruction templates, six trajectory cases, and the 78-repository inventory.
 - `assets/figure1.svg`: the paper’s original Figure 1, copied from its self-contained source SVG.
 - `assets/folium-prd.md`: the complete Folium episode-0001 PRD, as reproduced in Appendix C.
-- `assets/wordmark-option-a.svg`: selected blue/black lettering with a blue underline.
-- `assets/paper.pdf`: user-supplied paper dated October 25, 2026.
+- `assets/paper.pdf`: compiled SpecEngineeringBench manuscript.
 - `assets/logo.svg` / `assets/logo.png`: transparent horizontal logo for a README or website.
-- `assets/logo-display.png`: the full logo with transparent outer margins removed.
-- `assets/wordmark.png`: original lettering extracted from the approved logo.
-- `assets/wordmark-brand.svg`: self-contained black/brand-blue title variant, preserving the original lettering silhouette.
+- `assets/wordmark.png`: SpecEngineeringBench wordmark used in the hero.
 - `assets/mascot.svg` / `assets/mascot.png`: standalone bear extracted from the approved logo.
 - `assets/tokenwave-favicon.svg` / `assets/favicon.png`: the official blue TokenWave symbol for browser tabs, with a 64px PNG fallback.
 - `assets/hero.svg`: original workbench illustration.
 - `assets/social.png`: 1200 × 630 social preview.
 
-The approved bear logo was supplied by the project author. `assets/logo.png` preserves the original transparent PNG exactly. The mascot is extracted from that artwork without redrawing, and the workbench and social preview reuse the same character. The `.svg` logo and mascot files are self-contained wrappers embedding the PNG artwork; they are not vector redraws. The logo can be reused in the benchmark repository with:
+The approved bear logo was supplied by the project author. `assets/logo.png` combines the approved bear with the SpecEngineeringBench wordmark. The mascot is extracted from that artwork without redrawing, and the workbench and social preview reuse the same character. The logo SVG uses vector lettering and embeds the original bear artwork. The logo can be reused in the benchmark repository with:
 
 ```md
-<p align="center"><img src="assets/logo.png" width="850" alt="TestEngineerBench" /></p>
+<p align="center"><img src="assets/logo.png" width="850" alt="SpecEngineeringBench" /></p>
 ```
 
 Copy `assets/logo.png` to the destination repository first.
@@ -72,7 +69,7 @@ Font sources: [Noto Sans SC / Google Fonts](https://fonts.google.com/noto/specim
 
 ### Promotional film
 
-`video/TestEngineerBench-promo.mp4` is a 45-second English film (1920×1080, 24 fps, H.264/AAC), with an original synthesized score and interface cues. `video/promo-poster.png` is its cover. The warm background, typing sequence, centered interface and concise result transitions take visual cues from the supplied BackSearch reference; none of its footage or audio is reused.
+`video/SpecEngineeringBench-promo.mp4` is a 45-second English film (1920×1080, 24 fps, H.264/AAC), with an original synthesized score and interface cues. `video/promo-poster.png` is its cover. The warm background, typing sequence, centered interface and concise result transitions take visual cues from the supplied BackSearch reference; none of its footage or audio is reused.
 
 The Folium walkthrough uses the submitted option-forwarding assertion and evaluator outcomes from Appendix C (episode-0001, GPT-6-Astra). The repaired snapshot is an evaluator replay, not an agent-authored fix. The metrics are the paper’s seven-agent means, and the inventory counts match the current benchmark. The film uses OFL-licensed Noto Sans SC; no trial fonts are embedded. Static video font instances are derived from the same Noto webfont; the OFL is retained under `assets/fonts/`.
 
