@@ -41,7 +41,7 @@ The site follows the supplied TokenWave research guidelines: white/black/gray su
 - `assets/hero.svg`: original workbench illustration.
 - `assets/social.png`: 1200 × 630 social preview.
 
-The approved bear logo was supplied by the project author. `assets/logo.png` combines the approved bear with the SpecEngineeringBench wordmark. The mascot is extracted from that artwork without redrawing, and the workbench and social preview reuse the same character. The logo SVG uses vector lettering and embeds the original bear artwork. The logo can be reused in the benchmark repository with:
+The project wordmark was supplied by the project author. `assets/logo.png` preserves the supplied blue-underlined wordmark. The mascot is extracted from that artwork without redrawing, and the workbench reuses the same character. The logo SVG embeds the supplied PNG. The logo can be reused in the benchmark repository with:
 
 ```md
 <p align="center"><img src="assets/logo.png" width="850" alt="SpecEngineeringBench" /></p>
@@ -69,7 +69,7 @@ Font sources: [Noto Sans SC / Google Fonts](https://fonts.google.com/noto/specim
 
 ### Promotional film
 
-`video/SpecEngineeringBench-promo.mp4` is a 45-second English film (1920×1080, 24 fps, H.264/AAC), with an original synthesized score and interface cues. `video/promo-poster.png` is its cover. The warm background, typing sequence, centered interface and concise result transitions take visual cues from the supplied BackSearch reference; none of its footage or audio is reused.
+`video/SpecEngineeringBench-promo.mp4` is a 92-second English film (1920×1080, 24 fps, H.264/AAC), with an original synthesized score and interface cues. `video/promo-poster.png` is its cover. The 92-second film uses the supplied handwritten wordmark, a TokenWave opening card, requirements and test replays, localization diagrams, and paper-backed results. Its pacing and presentation draw on SWE-CoWork.
 
 The Folium walkthrough uses the submitted option-forwarding assertion and evaluator outcomes from Appendix C (episode-0001, GPT-6-Astra). The repaired snapshot is an evaluator replay, not an agent-authored fix. The metrics are the paper’s seven-agent means, and the inventory counts match the current benchmark. The film uses OFL-licensed Noto Sans SC; no trial fonts are embedded. Static video font instances are derived from the same Noto webfont; the OFL is retained under `assets/fonts/`.
 
