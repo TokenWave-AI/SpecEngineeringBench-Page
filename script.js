@@ -60,7 +60,7 @@ function wireTabs(selector,select){
 }
 wireTabs('[data-track]',button=>{activeTrack=button.dataset.track;sortColumn=tracks[activeTrack].defaultSort;ascending=false;document.getElementById('results-panel').setAttribute('aria-labelledby',button.id);renderResults();});
 function escapeHTML(value){return String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
-document.getElementById('copy-citation').addEventListener('click',async()=>{const status=document.getElementById('copy-status');try{await navigator.clipboard.writeText(document.getElementById('bibtex').textContent);status.textContent='BibTeX copied to clipboard.';}catch{status.textContent='Select and copy the BibTeX above; clipboard access is unavailable in this browser.';}});
+document.getElementById('copy-citation').addEventListener('click',async(event)=>{event.preventDefault();const status=document.getElementById('copy-status');try{await navigator.clipboard.writeText(document.getElementById('bibtex').textContent);status.textContent='BibTeX copied to clipboard.';}catch{status.textContent='Select and copy the BibTeX above; clipboard access is unavailable in this browser.';}});
 
 // Dataset charts use the current manuscript inventory, not older release audits.
 let selectedCategory = '';
