@@ -69,17 +69,9 @@ Font sources: [Noto Sans SC / Google Fonts](https://fonts.google.com/noto/specim
 
 ### Promotional film
 
-`video/SpecEngineeringBench-promo.mp4` is a 92-second English film (1920×1080, 24 fps, H.264/AAC), with an original synthesized score and interface cues. `video/promo-poster.png` is its cover. The 92-second film uses the supplied handwritten wordmark, a TokenWave opening card, requirements and test replays, localization diagrams, and paper-backed results. Its pacing and presentation draw on SWE-CoWork.
+`video/SpecEngineeringBench-promo.mp4` is a 96-second English film (1920×1080, 30 fps, H.264/AAC) with burned-in captions and an original synthesized score (120 BPM, D major; scene cuts land on bar lines). `video/promo-poster.png` is its cover. Render with `cd video && npm install && node render.mjs`; `node render.mjs --stills <dir> [t1,t2,...]` writes preview frames; `node render.mjs --poster` rewrites the cover only.
 
-The Folium walkthrough uses the submitted option-forwarding assertion and evaluator outcomes from Appendix C (episode-0001, GPT-6-Astra). The repaired snapshot is an evaluator replay, not an agent-authored fix. The metrics are the paper’s seven-agent means, and the inventory counts match the current benchmark. The film uses OFL-licensed Noto Sans SC; no trial fonts are embedded. Static video font instances are derived from the same Noto webfont; the OFL is retained under `assets/fonts/`.
+The film follows the SWE-CoWork and BlenderWorld layout: numbered section kickers, headlines with accent words, a caption bar, and a source line per scene. It opens on the Textual case (3,448 passing tests, 0% localization recall; Case 3), introduces the task inputs and multi-defect snapshots, replays the Folium option-forwarding test on both snapshots (Appendix C, GPT-6-Astra), shows a defect report matched at file, function, and hunk level, then presents the Table 3 leaderboard and findings from Tables 3–6. The repaired snapshot is an evaluator replay, not an agent-authored fix. The JSON defect report is an illustration of the reporting format. Every other number on screen comes from the paper.
 
-To edit or regenerate it, use Node.js 22+ and FFmpeg:
+The film uses Inter and JetBrains Mono (both SIL OFL 1.1, `video/fonts/`) and the model icons from the paper figures (`video/icons/`).
 
-```sh
-npm --prefix video ci
-npm --prefix video run render
-```
-
-`video/render.mjs` controls timing, typography, diagrams and animation. `video/soundtrack.mjs` creates the original music and UI cues. The homepage embeds the film immediately before the benchmark introduction with native controls, a poster and no autoplay. The Pages workflow publishes only the MP4 and poster from `video/`; the film is not posted to social media.
-
-Interactive presentation: tab indicators slide between selected buttons, panel changes fade in, and evidence/repository bars animate from zero. Animations respect reduced-motion preferences. RQ chart switches cover quality/localization, aggregate/per-model bug localization, function/hunk recall by defect type, test/localization mechanisms, and paired recall/precision. Mechanism shares are independent reported percentages, not a normalized partition.
