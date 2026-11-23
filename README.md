@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/logo.png" width="850" alt="SpecEngineeringBench" /></p>
 
-<p align="center"><b>Evaluating Coding Agents as Autonomous Software Test Engineers</b></p>
+<p align="center"><b>Evaluating Coding Agents as Autonomous Specification Engineers</b></p>
 <p align="center"><a href="assets/paper.pdf">Paper</a> · <a href="https://github.com/TokenWave-AI/SpecEngineeringBench">Code</a> · <a href="https://huggingface.co/datasets/Tokenwave-AI/SpecEngineeringBench">Data</a></p>
 
 SpecEngineeringBench evaluates requirements-driven testing and defect discovery across **100 instances**, **78 Python repositories**, **16 application categories**, and **531 recorded defect occurrences**. Agents receive a product requirements document, a prerelease repository, and a configured execution environment, without issue descriptions or investigation targets.
